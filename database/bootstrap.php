@@ -15,3 +15,4 @@ $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
 require_once __DIR__ . '/actions/users.php';
+require_once __DIR__ . '/actions/tags.php';

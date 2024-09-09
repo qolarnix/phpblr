@@ -19,7 +19,4 @@ Manager::schema()->create('posts', function($t) {
     // timestamps
     $t->timestamp('created_at')->useCurrent();
     $t->timestamp('updated_at')->nullable();
-
-    // index
-    $t->index('id');
 });
