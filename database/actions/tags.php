@@ -42,3 +42,22 @@ function get_tag_posts(int $tag_id) {
     
     return $posts;
 }
+
+function get_tag(int $tag_id) {
+    $tag = Manager::table('tags')->where('id', $tag_id)->get()->first();
+
+    if(is_null($tag)) {
+        error_log('Unable to find tag with given id: ' . $tag_id);
+        return false;
+    }
+
+    return tag_transformer($tag);
+}
+
+function tag_transformer(object $args): array {
+    $tag_data = [
+        'id' => $args->id,
+        'name' => $args->name,
+    ];
+    return $tag_data;
+}
