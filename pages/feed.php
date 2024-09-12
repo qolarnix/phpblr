@@ -20,6 +20,14 @@ foreach($tags as $t) {
     print_r($tag);
     echo '</pre>';
 }
+
+echo '<br><br>';
+$sample_feed = get_tag_sample([1, 2, 3, 4], 4);
+foreach($sample_feed as $p) {
+    echo '<pre>';
+    print_r($p);
+    echo '</pre>';
+}
 ?>
 
 <section class="py-12 px-6">

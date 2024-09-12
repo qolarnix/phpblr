@@ -43,6 +43,21 @@ function get_tag_posts(int $tag_id) {
     return $posts;
 }
 
+function get_tag_sample(array $tag_ids, int $num_posts): object {
+    $posts = Manager::table('tagJoins')
+        ->whereIn('tag_id', $tag_ids)
+        ->select('tag_id', 'post_id')
+        ->get();
+
+    $grouped_posts = $posts->groupBy('tag_id');
+
+    $limit_posts = $grouped_posts->map(function($p) use($num_posts) {
+        return $p->take($num_posts);
+    });
+
+    return $limit_posts;
+}
+
 function get_tag(int $tag_id) {
     $tag = Manager::table('tags')->where('id', $tag_id)->get()->first();
 
