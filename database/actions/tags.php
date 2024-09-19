@@ -34,15 +34,19 @@ function list_tags(int $post_id) {
     return $tags;
 }
 
-function get_tag_posts(int $tag_id) {
+function get_tag_posts(int $tag_id, int $amount = -1) {
     $posts = Manager::table('tagJoins')
-        ->take(-1)
+        ->take($amount)
         ->where('tag_id', $tag_id)
         ->get();
     
     return $posts;
 }
 
+/**
+ * Get X amount of posts from an array of tag ID's
+ * Useful for generating a feed of content based on tag preferences
+ */
 function get_tag_sample(array $tag_ids, int $num_posts): object {
     $posts = Manager::table('tagJoins')
         ->whereIn('tag_id', $tag_ids)
